@@ -1,59 +1,97 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+  import Counter from "./Counter.svelte";
+  import welcome from "$lib/images/svelte-welcome.webp";
+  import welcome_fallback from "$lib/images/svelte-welcome.png";
+  import AnimatedWave from "./AnimatedWave.svelte";
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+  <title>Home</title>
+  <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
 
-		to your new<br />SvelteKit app
-	</h1>
+  <AnimatedWave />
+  <div class="main-wrapper">
+    <div class="introduction">
+      <span>YuNing Chang</span>
+      <span>-</span>
+      <span> Technology x Business x Creator </span>
+    </div>
+    <!-- <span class="short-text"> yuningcdev@gmail.com </span> -->
 
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
+    <div class="scroll-me">
+      <div />
+    </div>
+  </div>
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
+  .main-wrapper {
+    color: white;
+    position: absolute;
+    /* height: fit-content; */
+    height: 600px;
+    width: fit-content;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
+  .introduction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0%, -50%);
+  }
+  .introduction span:nth-child(1) {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .introduction span:nth-child(2) {
+    font-size: 2rem;
+  }
+  .introduction span:nth-child(3) {
+    font-size: 1.5rem;
+    font-weight: 200;
+    font-style: italic;
+  }
+  .scroll-me {
+    width: 24px;
+    height: 48px;
+    position: absolute;
+    bottom: 0%;
+    border-radius: 42px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+  }
+  .scroll-me div {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    margin: 0px auto;
+    display: block;
+    position: relative;
+    top: 8%;
+    animation-name: fallingBall;
+    animation-duration: 1.25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fallingBall {
+    from {
+      background: rgba(255, 255, 255, 0.2);
+      top: 8%;
+    }
+    to {
+      background: rgb(255, 255, 255);
+      top: 72%;
+    }
+  }
 </style>
