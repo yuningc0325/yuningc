@@ -1,23 +1,14 @@
 <script>
   import P5 from "p5-svelte";
   import { onMount } from "svelte";
-  import me_image from "$lib/images/me.png";
 
   let sketch;
   let waves = [];
   let numOfPoints = 60;
-  let img;
   export let showStep;
 
-  // const imgWidth = 300;
-  // const imgHeight = 520;
-  const imgWidth = 500;
-  const imgHeight = 500;
   onMount(() => {
     sketch = (p5) => {
-      // p5.preload = () => {
-      //   img = p5.loadImage(me_image);
-      // };
       p5.setup = () => {
         const canvas = p5.createCanvas(p5.windowWidth, p5.windowHeight);
         canvas.position(0, 0, "fixed");
@@ -28,13 +19,11 @@
           new Wave(450, 0, -40, -80, 2),
         ];
 
-        p5.smooth()
+        p5.smooth();
       };
 
       p5.draw = () => {
-        // p5.background("#022C43");
         p5.clear();
-        // p5.image(img, p5.width * 0.5 - imgWidth * 0.5, p5.height * 0.5 - imgHeight * 0.5, imgWidth, imgHeight);
         p5.translate(p5.windowWidth * 0.5, p5.windowHeight * 0.46);
         for (const wave of waves) {
           wave.display(p5);
@@ -55,7 +44,7 @@
 
     display(p5) {
       let xOff = 0;
-      const scaler = showStep === 1 ? showStep : 2
+      const scaler = showStep === 1 ? showStep : 2;
       p5.noFill();
       // p5.fill("rgba(0,0,0,0.2)")
       p5.stroke(this.index > 0 ? "rgba(255,255,255,0.5)" : "white");
@@ -81,18 +70,9 @@
   }
 </script>
 
-<!-- <div class="my-text">Read More..</div> -->
-
-<!-- <div class="my-text">
-  -
- </div> -->
 {#if sketch}
   <P5 {sketch} />
 {/if}
 
-<!-- <picture>
-  <source srcset={me_image} type="image/webp" />
-  <img src={me_image} alt="Welcome" />
-</picture> -->
 <style>
 </style>

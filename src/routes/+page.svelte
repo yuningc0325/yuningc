@@ -1,7 +1,4 @@
 <script>
-  import Counter from "./Counter.svelte";
-  import welcome from "$lib/images/svelte-welcome.webp";
-  import welcome_fallback from "$lib/images/svelte-welcome.png";
   import AnimatedWave from "./AnimatedWave.svelte";
   import Scroll from "./Scroll.svelte";
   import { fade } from "svelte/transition";
@@ -36,7 +33,6 @@
         <span>-</span>
         <span> Technology x Business x Creator </span>
       </div>
-      <!-- <span class="short-text"> yuningcdev@gmail.com </span> -->
     {/if}
     {#if showStep === 2}
       <!-- <div class="introduction" transition:fade={{ duration: 1200 }}>

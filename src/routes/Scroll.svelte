@@ -1,23 +1,8 @@
 <script>
-  import { onMount } from "svelte";
-  // import scrollama from "scrollama";
-
   const sectionNumbers = [1, 2, 3, 4, 5, 6];
-  // const scroller = scrollama();
-
-  // onMount(() => {
-  //   scroller
-  //     .setup({ step: ".step" })
-  //     .onStepEnter((res) => console.log("in", res))
-  //     .onStepExit((res) => console.log("out", res));
-  // });
 </script>
 
 <div class="scroll-wrapper">
-  <!-- <div class="inner"/>
-    <div class="inner"/>
-    <div class="inner"/>
-    <div class="inner"/> -->
   {#each sectionNumbers as sectionNumber}
     <div class="scroll-step" data-step={sectionNumber}>{sectionNumber}</div>
   {/each}
