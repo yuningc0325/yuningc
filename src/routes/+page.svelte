@@ -3,6 +3,23 @@
   import welcome from "$lib/images/svelte-welcome.webp";
   import welcome_fallback from "$lib/images/svelte-welcome.png";
   import AnimatedWave from "./AnimatedWave.svelte";
+  import Scroll from "./Scroll.svelte";
+  import { fade } from "svelte/transition";
+  import { onMount } from "svelte";
+  import scrollama from "scrollama";
+
+  const scroller = scrollama();
+
+  let showStep = 0;
+  $: scrollTransform = showStep === 1 ? 0 : 250;
+  onMount(() => {
+    scroller
+      .setup({ step: ".scroll-step" })
+      .onStepEnter((res) => {
+        showStep = res.index;
+      })
+      .onStepExit((res) => console.log("out", res));
+  });
 </script>
 
 <svelte:head>
@@ -11,26 +28,36 @@
 </svelte:head>
 
 <section>
-
-  <AnimatedWave />
+  <AnimatedWave {showStep} />
   <div class="main-wrapper">
-    <div class="introduction">
-      <span>YuNing Chang</span>
+    {#if showStep === 1}
+      <div class="introduction" transition:fade={{ duration: 1200 }}>
+        <span>YuNing Chang</span>
+        <span>-</span>
+        <span> Technology x Business x Creator </span>
+      </div>
+      <!-- <span class="short-text"> yuningcdev@gmail.com </span> -->
+    {/if}
+    {#if showStep === 2}
+      <!-- <div class="introduction" transition:fade={{ duration: 1200 }}>
+      <span>XXX</span>
       <span>-</span>
       <span> Technology x Business x Creator </span>
-    </div>
-    <!-- <span class="short-text"> yuningcdev@gmail.com </span> -->
-
-    <div class="scroll-me">
-      <div />
-    </div>
+    </div> -->
+    {/if}
+    {#if showStep >= 1}
+      <div class="scroll-me" style="transform: translate(0px,{scrollTransform}px);">
+        <div class="scroll-me-hint" />
+      </div>
+    {/if}
   </div>
+  <Scroll />
 </section>
 
 <style>
   .main-wrapper {
     color: white;
-    position: absolute;
+    position: fixed;
     /* height: fit-content; */
     height: 600px;
     width: fit-content;
@@ -64,21 +91,24 @@
     font-style: italic;
   }
   .scroll-me {
+    transition: 1.2s all;
     width: 24px;
     height: 48px;
     position: absolute;
     bottom: 0%;
     border-radius: 42px;
     border: 3px solid rgba(255, 255, 255, 0.8);
+    background: none;
+    display: flex;
+    justify-content: center;
   }
-  .scroll-me div {
+  .scroll-me-hint {
     width: 8px;
     height: 8px;
     border-radius: 100%;
     margin: 0px auto;
-    display: block;
+    /* display: block; */
     position: relative;
-    top: 8%;
     animation-name: fallingBall;
     animation-duration: 1.25s;
     animation-timing-function: linear;
@@ -87,11 +117,11 @@
   @keyframes fallingBall {
     from {
       background: rgba(255, 255, 255, 0.2);
-      top: 8%;
+      top: 12%;
     }
     to {
       background: rgb(255, 255, 255);
-      top: 72%;
+      top: 62%;
     }
   }
 </style>

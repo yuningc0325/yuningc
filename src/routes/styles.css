@@ -17,7 +17,8 @@
 
 body {
   background: #001018;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   /* min-height: 100vh;
   margin: 0; */
   background-attachment: fixed;
